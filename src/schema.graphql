@@ -1,0 +1,36 @@
+# https://docs.aws.amazon.com/ja_jp/appsync/latest/devguide/designing-your-schema.html
+
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Author {
+  authorName: String
+  Books: [Book]
+}
+
+input AuthorInput {
+  authorName: String
+  Books: [BookInput]
+}
+
+type Book {
+  bookName: String
+  Authors: [Author]
+}
+
+input BookInput {
+  bookName: String
+  Authors: [AuthorInput]
+}
+
+type Query {
+  getAuthor(authorName: String): Author
+  getBook(bookName: String): Book
+}
+
+type Mutation {
+  addAuthor(input: [BookInput]): Author
+  addBook(input: [AuthorInput]): Book
+}
